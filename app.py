@@ -12,10 +12,9 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///codeblocks.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 socketio = SocketIO(app, 
                    cors_allowed_origins="*",
-                   ping_timeout=60,
-                   ping_interval=25,
-                   async_mode=None)
-
+                   ping_timeout=20, 
+                   ping_interval=10, 
+                   async_mode=None) 
 rooms = {}
 
 # Register the API blueprint
