@@ -6,7 +6,7 @@ from sqlalchemy.exc import IntegrityError
 # Create Blueprint for API routes
 api = Blueprint('api', __name__)
 
-# Reference to rooms (will be imported from server.py)
+# Reference to rooms (will be imported from app.py)
 rooms = None
 
 def set_rooms_reference(rooms_dict):

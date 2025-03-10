@@ -2,7 +2,7 @@ from flask import request
 from flask_socketio import join_room, emit
 from models import CodeBlock
 
-# Reference to socketio and rooms (will be imported from server.py)
+# Reference to socketio and rooms (will be imported from app.py)
 socketio = None
 rooms = None
 
