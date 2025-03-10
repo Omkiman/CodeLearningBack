@@ -10,7 +10,11 @@ app = Flask(__name__)
 CORS(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///codeblocks.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-socketio = SocketIO(app, cors_allowed_origins="*")
+socketio = SocketIO(app, 
+                   cors_allowed_origins="*", 
+                   async_mode='eventlet',
+                   ping_timeout=60,
+                   ping_interval=25)
 
 rooms = {}
 
