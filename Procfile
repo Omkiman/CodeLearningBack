@@ -1,1 +1,1 @@
-web: gunicorn app:app --worker-class gevent --worker-connections=1000 --workers=1 --timeout=120
+web: python wsgi.py

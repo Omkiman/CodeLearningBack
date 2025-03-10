@@ -5,6 +5,8 @@ from models import db
 from api import api, set_rooms_reference
 from sockets import init_socket_handlers
 from db_init import init_database
+from gevent import monkey
+monkey.patch_all()
 
 app = Flask(__name__)
 CORS(app)
@@ -13,10 +15,11 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 socketio = SocketIO(
     app,
     cors_allowed_origins="*",
-    ping_timeout=20,
-    ping_interval=10,
-    async_mode='gevent'
-    )
+    ping_timeout=30,
+    ping_interval=15,
+    async_mode='gevent',
+    transports=['websocket']
+)
 
 rooms = {}
 
