@@ -11,10 +11,10 @@ CORS(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///codeblocks.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 socketio = SocketIO(app, 
-                   cors_allowed_origins="*", 
-                   async_mode='gevent',
+                   cors_allowed_origins="*",
                    ping_timeout=60,
-                   ping_interval=25)
+                   ping_interval=25,
+                   async_mode=None)
 
 rooms = {}
 
