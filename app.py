@@ -19,10 +19,11 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 socketio = SocketIO(
     app,
     cors_allowed_origins=["https://tomswatchingfromthailand.netlify.app"],
-    ping_timeout=30,
-    ping_interval=15,
+    ping_timeout=60,
+    ping_interval=25000,
     async_mode='gevent',
-    transports=['websocket', 'polling']
+    transports=['websocket'],
+    max_http_buffer_size=5*1024*1024
     )
 
 
