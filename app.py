@@ -9,7 +9,7 @@ from gevent import monkey
 monkey.patch_all()
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": ["https://tomswatchingfromthailand.netlify.app/", "http://localhost:3000"]}})
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///codeblocks.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 socketio = SocketIO(
