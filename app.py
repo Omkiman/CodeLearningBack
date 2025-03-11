@@ -9,7 +9,7 @@ from gevent import monkey
 monkey.patch_all()
 
 app = Flask(__name__)
-CORS(app, resources={r"/api/*": {
+CORS(app, resources={r"/*": {
     "origins": ["https://tomswatchingfromthailand.netlify.app"],
     "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     "allow_headers": ["Content-Type", "Authorization"]
@@ -18,12 +18,13 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///codeblocks.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 socketio = SocketIO(
     app,
-    cors_allowed_origins="*",
+    cors_allowed_origins=["https://tomswatchingfromthailand.netlify.app"],
     ping_timeout=30,
     ping_interval=15,
     async_mode='gevent',
-    transports=['websocket']
-)
+    transports=['websocket', 'polling']
+    )
+
 
 rooms = {}
 
@@ -40,4 +41,6 @@ init_socket_handlers(socketio, rooms)
 init_database(app)
 
 if __name__ == '__main__':
-    socketio.run(app, debug=True)
+    import os
+    port = int(os.environ.get('PORT', 5000))
+    socketio.run(app, host='0.0.0.0', port=port, debug=False)
